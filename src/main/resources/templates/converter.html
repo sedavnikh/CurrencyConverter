@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Currency Converter</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/converter.css" th:href="@{/css/converter.css}" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $(function() {
+                $("#datepicker")
+                        .datepicker({ maxDate: "-1D" })
+                        .datepicker( "option", "dateFormat", "yy-mm-dd ");
+                $("#datepicker-clear").click(function() {
+                        $("#datepicker").val("");
+                        return false;
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+
+<div class="converter-page">
+    <div class="form">
+        <form th:action="@{/convert}" th:object="${converterForm}" method="post">
+            <div>
+                <input type="number" min="1" value="1" th:field="*{amount}"/>
+                <select th:field="*{currencyFrom}">
+                    <option th:each="currency : ${currencies}"
+                            th:value="${currency}"
+                            th:text="${currency}"></option>
+                </select>
+            </div>
+            <div>
+                <input type="text" th:value="${result}" readonly="readonly" />
+                <select th:field="*{currencyTo}">
+                    <option th:each="currency : ${currencies}"
+                            th:value="${currency}"
+                            th:text="${currency}"></option>
+                </select>
+            </div>
+            <div>
+                <input type="text" id="datepicker" th:field="*{date}" placeholder="history date" readonly="readonly" />
+                <button id="datepicker-clear">clear</button>
+            </div>
+            <button>calculate</button>
+        </form>
+
+        <br/><br/>
+
+        <ul th:each="hist  : ${history}">
+            <li th:utext="${#dates.format(hist.timestamp, 'yyyy-MM-dd') +
+                            ': ' +
+                            hist.amount + ' ' + hist.currencyFrom + ' = ' + hist.result + ' ' + hist.currencyTo +
+                            (hist.historicalDate != null ? (' (' + hist.historicalDate + ')') : '')
+                          }">
+
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+</body>
+</html>
+

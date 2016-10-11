@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Currency Converter</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/converter.css" th:href="@{/css/converter.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="signup-page">
+    <div class="form">
+        <form th:object="${signupForm}" method="post">
+            <!--/* email */-->
+            <span class="error-field" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            <input th:field="*{email}" placeholder="email"/>
+
+            <!--/* password */-->
+            <span class="error-field" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            <input type="password" th:field="*{password}" placeholder="password"/>
+
+            <!--/* password confirmation */-->
+            <span class="error-field" th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}"></span>
+            <input type="password" th:field="*{passwordConfirmation}" placeholder="confirm password"/>
+
+            <br/><br/>
+
+            <!--/* country */-->
+            <span class="error-field" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
+            <input th:field="*{country}" placeholder="country"/>
+
+            <!--/* city */-->
+            <span class="error-field" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+            <input th:field="*{city}" placeholder="city"/>
+
+            <!--/* street */-->
+            <span class="error-field" th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></span>
+            <input th:field="*{street}" placeholder="street"/>
+
+            <!--/* ZIP code */-->
+            <span class="error-field" th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"></span>
+            <input th:field="*{zipCode}" placeholder="ZIP code"/>
+
+            <button>create</button>
+            <p class="message">Already registered? <a href="@{/index}">Sign In</a></p>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

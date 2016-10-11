@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Currency Converter</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/converter.css" th:href="@{/css/converter.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+
+<div class="converter-page">
+    <div class="form">
+        <form th:action="@{/login}" method="post">
+            <input type="" placeholder="username" name="username"/>
+            <input type="password" placeholder="password" name="password"/>
+            <button>login</button>
+            <p class="message">Not registered? <a th:href="@{/signup}">Create an account</a></p>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
